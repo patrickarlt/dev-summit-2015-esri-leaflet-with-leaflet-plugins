@@ -67,19 +67,20 @@
     if (active) {
       // are active build line and query
       active = false;
-        var profile = profileService.createTask();
-        profile.setParam("DEMResolution", "FINEST");
-        profile.setParam("ProfileIdField", "OID");
-        profile.setParam("MaximumSampleDistance", 50000);
-        profile.setParam("returnZ", true);
-        profile.setParam("InputLineFeatures", polyline.toGeoJSON());
-        profile.run(function(error, geojson, response){
-          console.log(geojson);
-          var el = L.control.elevation().addTo(map)
-          L.geoJson(geojson,{
-            onEachFeature: el.addData.bind(el)
-          }).addTo(map);
-        });
+      var profile = profileService.createTask();
+      profile.setParam("DEMResolution", "FINEST");
+      profile.setParam("ProfileIdField", "OID");
+      profile.setParam("MaximumSampleDistance", 50000);
+      profile.setParam("returnZ", true);
+      profile.setParam("InputLineFeatures", polyline.toGeoJSON());
+      profile.run(function(error, geojson, response){
+        console.log(geojson);
+        var el = L.control.elevation().addTo(map)
+
+        L.geoJson(geojson,{
+          onEachFeature: el.addData.bind(el)
+        }).addTo(map);
+      });
     } else {
       // in active create new polyline
       active = true;
